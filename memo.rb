@@ -10,18 +10,23 @@ if memo_type === "1"
   memo_title = gets.chomp.to_s
   
   puts "ーーーーーーーーーーーーーメモ内容を入力してくださいーーーーーーーーーーーーー"
-  memo_text = gets.chomp.to_s
+  memo_text = STDIN.read.chomp.to_s
   CSV.open("#{memo_title}.csv",'w') do |csv|
     csv << [memo_text]
   end
   
 elsif memo_type === "2"
   puts "----メモ編集----"
-  Dir.glob("**/csv") do |item|
+  Dir.glob("**/*.csv") do |item|
    puts item
   end
   puts "ーーーーーーーーーーーーー上記のcsvファイルから、編集したいファイル名を拡張子を除いて入力してくださいーーーーーーーーーーーーー"
   memo_title = gets.chomp.to_s
+  if memo_title = item
+    puts "OK"
+  else
+    puts "NG"
+  end
   
   CSV.open("#{memo_title}.csv",'a') do |csv|
     puts "ーーーーーーーーーーーーー#{memo_title}.csvに追記しますーーーーーーーーーーーーー"
